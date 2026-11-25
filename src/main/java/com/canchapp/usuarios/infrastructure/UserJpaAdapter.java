@@ -44,6 +44,10 @@ public class UserJpaAdapter implements UsuarioRepository {
     }
 
     @Override
+    public boolean existsByRol(Rol rol) {
+        return jpa.existsByRol(rol.name());
+    }
+  
     public Optional<Usuario> findById(Long id) {
         return jpa.findById(id).map(UserJpaAdapter::aDominio);
     }

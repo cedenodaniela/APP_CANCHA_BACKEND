@@ -60,6 +60,20 @@ public final class Usuario {
                 Objects.requireNonNull(hashContrasena, "hashContrasena"), Rol.CLIENTE, true, ahora, ahora);
     }
 
+    /**
+     * Crea la primera cuenta {@link Rol#ADMINISTRADOR}, la que se siembra al instalar el sistema.
+     * Las siguientes se crean desde el panel con una invitación (RF-22).
+     *
+     * @param hashContrasena contraseña ya codificada por {@link CodificadorContrasena}
+     * @see "RF-18: las cuentas de administrador no salen del registro público"
+     */
+    public static Usuario crearAdministradorInicial(String nombre, String apellido, String email,
+                                                    String hashContrasena, Instant ahora) {
+        return new Usuario(null, requerido(nombre, "nombre"), requerido(apellido, "apellido"),
+                normalizarCorreo(email), null,
+                Objects.requireNonNull(hashContrasena, "hashContrasena"), Rol.ADMINISTRADOR, true, ahora, ahora);
+    }
+
     /** Reconstruye un usuario ya guardado. Solo lo usan los adaptadores de persistencia. */
     public static Usuario reconstituir(Long id, String nombre, String apellido, String email, String telefono,
                                        String hashContrasena, Rol rol, boolean activo,

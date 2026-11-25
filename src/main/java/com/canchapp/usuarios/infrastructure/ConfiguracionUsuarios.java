@@ -2,6 +2,7 @@ package com.canchapp.usuarios.infrastructure;
 
 import com.canchapp.usuarios.application.IniciarSesionUseCase;
 import com.canchapp.usuarios.application.RegistrarUsuarioUseCase;
+import com.canchapp.usuarios.application.SembrarAdministradorInicialUseCase;
 import com.canchapp.usuarios.application.RestablecerContrasenaUseCase;
 import com.canchapp.usuarios.application.SolicitarRecuperacionUseCase;
 import com.canchapp.usuarios.domain.CodificadorContrasena;
@@ -33,6 +34,12 @@ public class ConfiguracionUsuarios {
     }
 
     @Bean
+    public SembrarAdministradorInicialUseCase sembrarAdministradorInicialUseCase(UsuarioRepository usuarios,
+                                                                                 CodificadorContrasena codificador,
+                                                                                 Clock reloj) {
+        return new SembrarAdministradorInicialUseCase(usuarios, codificador, reloj);
+    }
+  
     public SolicitarRecuperacionUseCase solicitarRecuperacionUseCase(
             UsuarioRepository usuarios, TokenRecuperacionRepository tokens, GeneradorToken generador,
             EnviadorCorreoRecuperacion correo, Clock reloj,
@@ -54,4 +61,5 @@ public class ConfiguracionUsuarios {
                                                      EmisorToken emisor) {
         return new IniciarSesionUseCase(usuarios, codificador, emisor);
     }
+  
 }
