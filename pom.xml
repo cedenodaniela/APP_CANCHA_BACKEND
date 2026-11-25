@@ -48,6 +48,12 @@
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
 
+        <!-- Correo SMTP: recuperación de contraseña (RF-02) e invitación de administradores (RF-22) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <!-- Spring Data JPA (trae jakarta.persistence con la versión que maneja Spring Boot) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

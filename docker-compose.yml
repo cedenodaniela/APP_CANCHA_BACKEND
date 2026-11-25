@@ -1,4 +1,4 @@
-# Base de datos local de CanchApp.
+# Base de datos y correo locales de CanchApp.
 # Las credenciales se leen de .env (copia .env.example). El esquema NO se crea aquí:
 # lo crean las migraciones de Flyway al arrancar el backend.
 
@@ -21,6 +21,16 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  # Servidor SMTP de desarrollo (RF-02): recibe los correos de la API sin enviarlos a nadie
+  # y los muestra en http://localhost:8025 (desde el emulador, http://10.0.2.2:8025).
+  correo:
+    image: axllent/mailpit:v1.21
+    container_name: canchapp_correo
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 
 volumes:
   pg_data:
