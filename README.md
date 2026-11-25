@@ -26,12 +26,17 @@ La documentación general del proyecto **no vive aquí**: está en la carpeta de
 ```bash
 cp .env.example .env        # una sola vez; completa la contraseña y la clave JWT
 docker compose up -d db     # PostgreSQL 15 en localhost:5432
+docker compose up -d correo # Mailpit: recibe los correos de la API
 ./mvnw spring-boot:run      # API en http://localhost:8080/api/v1
 ```
 
 `.env` no se versiona. Lo leen `docker-compose.yml` y Spring Boot. El esquema lo crean las migraciones de Flyway al arrancar.
 
 Desde el emulador de Android, la API se ve en `http://10.0.2.2:8080/api/v1`.
+
+### Correos en desarrollo
+
+Mailpit recibe en `localhost:1025` los correos que envía la API (recuperación de contraseña, RF-02) sin mandarlos a nadie, y los muestra en http://localhost:8025. Desde el emulador se abren en `http://10.0.2.2:8025`; el botón del correo abre la app en la pantalla de contraseña nueva. En producción, `CANCHAPP_SMTP_*` apuntan a un servidor SMTP real.
 
 ## Pruebas
 
