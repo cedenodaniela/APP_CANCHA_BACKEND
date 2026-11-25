@@ -43,6 +43,11 @@ public class UserJpaAdapter implements UsuarioRepository {
         return jpa.existsByEmail(email);
     }
 
+    @Override
+    public boolean existsByRol(Rol rol) {
+        return jpa.existsByRol(rol.name());
+    }
+
     /**
      * @throws CorreoYaRegistradoException si otra solicitud registró el mismo correo justo antes
      *         (la restricción {@code uq_usuario_email} lo impide en la base de datos)

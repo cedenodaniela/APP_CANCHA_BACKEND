@@ -2,6 +2,7 @@ package com.canchapp.usuarios.infrastructure;
 
 import com.canchapp.usuarios.application.IniciarSesionUseCase;
 import com.canchapp.usuarios.application.RegistrarUsuarioUseCase;
+import com.canchapp.usuarios.application.SembrarAdministradorInicialUseCase;
 import com.canchapp.usuarios.domain.CodificadorContrasena;
 import com.canchapp.usuarios.domain.EmisorToken;
 import com.canchapp.usuarios.domain.UsuarioRepository;
@@ -24,6 +25,13 @@ public class ConfiguracionUsuarios {
                                                            CodificadorContrasena codificador,
                                                            Clock reloj) {
         return new RegistrarUsuarioUseCase(usuarios, codificador, reloj);
+    }
+
+    @Bean
+    public SembrarAdministradorInicialUseCase sembrarAdministradorInicialUseCase(UsuarioRepository usuarios,
+                                                                                 CodificadorContrasena codificador,
+                                                                                 Clock reloj) {
+        return new SembrarAdministradorInicialUseCase(usuarios, codificador, reloj);
     }
 
     @Bean

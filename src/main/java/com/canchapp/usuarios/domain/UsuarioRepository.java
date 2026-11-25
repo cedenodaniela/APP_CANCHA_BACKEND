@@ -14,6 +14,9 @@ public interface UsuarioRepository {
 
     boolean existsByEmail(String email);
 
+    /** Indica si existe al menos una cuenta con ese rol, activa o no. */
+    boolean existsByRol(Rol rol);
+
     /** Inserta o actualiza y devuelve el usuario con su id. */
     Usuario save(Usuario usuario);
 }
