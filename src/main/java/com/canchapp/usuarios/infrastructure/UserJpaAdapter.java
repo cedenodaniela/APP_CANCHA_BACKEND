@@ -43,6 +43,11 @@ public class UserJpaAdapter implements UsuarioRepository {
         return jpa.existsByEmail(email);
     }
 
+    @Override
+    public Optional<Usuario> findById(Long id) {
+        return jpa.findById(id).map(UserJpaAdapter::aDominio);
+    }
+
     /**
      * @throws CorreoYaRegistradoException si otra solicitud registró el mismo correo justo antes
      *         (la restricción {@code uq_usuario_email} lo impide en la base de datos)
