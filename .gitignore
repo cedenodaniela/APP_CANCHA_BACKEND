@@ -1,0 +1,37 @@
+# Backend · Maven / Java
+target/
+*.class
+
+# Entorno y secretos: nunca se versionan
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+application-local.properties
+
+# IDE y sistema operativo
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Borradores locales que no forman parte del código (por ejemplo, borradores-rf04-rf05/)
+/borradores-*/
+
+# Salidas de IDEs de Java (Eclipse, VS Code, Spring Tools)
+.classpath
+.project
+.settings/
+.factorypath
+.sts4-cache/
+bin/
+out/
+
+# Volcados de memoria de la JVM
+*.hprof
+hs_err_pid*

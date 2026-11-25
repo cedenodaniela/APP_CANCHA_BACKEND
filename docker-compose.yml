@@ -1,0 +1,26 @@
+# Base de datos local de CanchApp.
+# Las credenciales se leen de .env (copia .env.example). El esquema NO se crea aquí:
+# lo crean las migraciones de Flyway al arrancar el backend.
+
+services:
+  db:
+    image: postgres:15
+    container_name: canchapp_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${CANCHAPP_DB_NOMBRE:-canchapp}
+      POSTGRES_USER: ${CANCHAPP_DB_USUARIO:?Define CANCHAPP_DB_USUARIO en .env}
+      POSTGRES_PASSWORD: ${CANCHAPP_DB_CONTRASENA:?Define CANCHAPP_DB_CONTRASENA en .env}
+      TZ: America/Guayaquil
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pg_data:
