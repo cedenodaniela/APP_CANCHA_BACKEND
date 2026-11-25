@@ -14,6 +14,9 @@ public interface UsuarioRepository {
 
     boolean existsByEmail(String email);
 
+    /** Indica si ya existe al menos una cuenta con el rol dado (se usa para sembrar el primer administrador). */
+    boolean existsByRol(Rol rol);
+
     Optional<Usuario> findById(Long id);
 
     /** Inserta o actualiza y devuelve el usuario con su id. */
