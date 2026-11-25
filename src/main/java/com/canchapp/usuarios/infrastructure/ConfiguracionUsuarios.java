@@ -1,0 +1,35 @@
+package com.canchapp.usuarios.infrastructure;
+
+import com.canchapp.usuarios.application.IniciarSesionUseCase;
+import com.canchapp.usuarios.application.RegistrarUsuarioUseCase;
+import com.canchapp.usuarios.domain.CodificadorContrasena;
+import com.canchapp.usuarios.domain.EmisorToken;
+import com.canchapp.usuarios.domain.UsuarioRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.time.Clock;
+
+/**
+ * Declara los casos de uso del módulo {@code usuarios} como beans de Spring.
+ * <p>
+ * Los casos de uso son Java puro (AGENTS.md §4): Spring se agrega aquí, en infraestructura,
+ * y no en la capa {@code application}.
+ */
+@Configuration
+public class ConfiguracionUsuarios {
+
+    @Bean
+    public RegistrarUsuarioUseCase registrarUsuarioUseCase(UsuarioRepository usuarios,
+                                                           CodificadorContrasena codificador,
+                                                           Clock reloj) {
+        return new RegistrarUsuarioUseCase(usuarios, codificador, reloj);
+    }
+
+    @Bean
+    public IniciarSesionUseCase iniciarSesionUseCase(UsuarioRepository usuarios,
+                                                     CodificadorContrasena codificador,
+                                                     EmisorToken emisor) {
+        return new IniciarSesionUseCase(usuarios, codificador, emisor);
+    }
+}
