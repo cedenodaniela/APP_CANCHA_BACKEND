@@ -94,6 +94,17 @@ public final class Usuario {
         return limpio;
     }
 
+    /**
+     * Devuelve la misma cuenta con una contraseña nueva (RF-02). El usuario no se modifica:
+     * el dominio no tiene setters.
+     *
+     * @param nuevoHash contraseña ya validada con {@link #validarContrasena(String)} y codificada
+     */
+    public Usuario cambiarContrasena(String nuevoHash, Instant ahora) {
+        return new Usuario(id, nombre, apellido, email, telefono,
+                Objects.requireNonNull(nuevoHash, "nuevoHash"), rol, activo, fechaCreacion, ahora);
+    }
+
     /** Solo una cuenta activa y con contraseña definida puede iniciar sesión. */
     public boolean puedeIniciarSesion() {
         return activo && hashContrasena != null;

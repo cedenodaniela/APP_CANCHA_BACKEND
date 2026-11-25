@@ -14,6 +14,8 @@ public interface UsuarioRepository {
 
     boolean existsByEmail(String email);
 
+    Optional<Usuario> findById(Long id);
+
     /** Inserta o actualiza y devuelve el usuario con su id. */
     Usuario save(Usuario usuario);
 }

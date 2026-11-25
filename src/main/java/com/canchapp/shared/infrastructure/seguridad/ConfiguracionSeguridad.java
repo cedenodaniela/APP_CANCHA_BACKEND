@@ -38,7 +38,8 @@ import java.util.List;
  * Seguridad de la API (RNF-02).
  * <ul>
  *   <li>Sin sesión de servidor ni CSRF: cada solicitud trae su JWT en {@code Authorization: Bearer}.</li>
- *   <li>Públicos solo el inicio de sesión y el registro (RF-01). Todo lo demás exige token.</li>
+ *   <li>Públicos solo el inicio de sesión y el registro (RF-01) y la recuperación de contraseña
+ *       (RF-02). Todo lo demás exige token.</li>
  *   <li>El claim {@code rol} se convierte en {@code ROLE_CLIENTE} o {@code ROLE_ADMINISTRADOR},
  *       para autorizar por rol en cada endpoint con {@code @PreAuthorize}.</li>
  *   <li>Los errores 401 y 403 usan el mismo cuerpo {@code {codigo, mensaje}} que el resto de la API.</li>
@@ -59,7 +60,8 @@ public class ConfiguracionSeguridad {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/login", "/api/v1/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/login", "/api/v1/usuarios",
+                                "/api/v1/auth/recuperacion", "/api/v1/auth/recuperacion/restablecer").permitAll()
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(rs -> rs
