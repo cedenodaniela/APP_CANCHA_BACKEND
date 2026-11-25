@@ -62,6 +62,8 @@ public class ConfiguracionSeguridad {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/login", "/api/v1/usuarios",
                                 "/api/v1/auth/recuperacion", "/api/v1/auth/recuperacion/restablecer").permitAll()
+                        // Página del botón del correo de recuperación, que abre la app (RF-02).
+                        .requestMatchers(HttpMethod.GET, "/recuperar-contrasena").permitAll()
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(rs -> rs

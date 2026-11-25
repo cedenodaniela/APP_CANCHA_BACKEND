@@ -36,7 +36,9 @@ Desde el emulador de Android, la API se ve en `http://10.0.2.2:8080/api/v1`.
 
 ### Correos en desarrollo
 
-Mailpit recibe en `localhost:1025` los correos que envía la API (recuperación de contraseña, RF-02) sin mandarlos a nadie, y los muestra en http://localhost:8025. Desde el emulador se abren en `http://10.0.2.2:8025`; el botón del correo abre la app en la pantalla de contraseña nueva. En producción, `CANCHAPP_SMTP_*` apuntan a un servidor SMTP real.
+Mailpit recibe en `localhost:1025` los correos que envía la API (recuperación de contraseña, RF-02) sin mandarlos a nadie, y los muestra en http://localhost:8025. Con `adb reverse tcp:8025 tcp:8025` se abren también en el celular, en `http://localhost:8025`.
+
+El botón del correo lleva a `/recuperar-contrasena?token=…` de esta API (`CANCHAPP_URL_RECUPERACION`), una página con el botón «Abrir CanchApp» que abre la app en la pantalla de contraseña nueva. Los lectores de correo bloquean los enlaces `canchapp://`, por eso el correo usa una dirección web. Esa dirección tiene que ser alcanzable desde el celular: en desarrollo, `http://localhost:8080` con `adb reverse tcp:8080 tcp:8080`; en producción, la URL HTTPS pública del backend. En producción, `CANCHAPP_SMTP_*` apuntan a un servidor SMTP real.
 
 ## Pruebas
 

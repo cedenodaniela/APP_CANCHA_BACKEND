@@ -59,7 +59,7 @@ public class CorreoRecuperacionSmtp implements EnviadorCorreoRecuperacion {
                 Hola, %s:
 
                 Recibimos una solicitud para restablecer tu contraseña de CanchApp.
-                Abre este enlace desde tu celular, con la app CanchApp instalada:
+                Abre este enlace desde el celular donde tienes la app CanchApp:
 
                 %s
 
@@ -77,8 +77,8 @@ public class CorreoRecuperacionSmtp implements EnviadorCorreoRecuperacion {
                   <h2 style="color:#0f6b3e">Restablece tu contraseña</h2>
                   <p>Hola, %s:</p>
                   <p>Recibimos una solicitud para restablecer tu contraseña de CanchApp.
-                     Abre este enlace desde tu celular, con la app CanchApp instalada.</p>
-                  <p><a href="%s" style="display:inline-block;padding:12px 20px;border-radius:24px;
+                     Abre este enlace desde el celular donde tienes la app CanchApp.</p>
+                  <p><a href="%s" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 20px;border-radius:24px;
                      background:#0f6b3e;color:#ffffff;text-decoration:none;font-weight:600">Crear contraseña nueva</a></p>
                   <p style="color:#4d5a52">El enlace vence en %d minutos y sirve una sola vez.
                      Si no fuiste tú, ignora este correo: tu contraseña no cambia.</p>
