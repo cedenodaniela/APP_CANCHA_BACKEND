@@ -54,6 +54,14 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <!-- Escribe WebP con ImageIO: las fotos se guardan convertidas a WebP (RF-04, DERCAS §2.2.3).
+             Java no trae un escritor de WebP; esta librería incluye el codificador para Windows, Linux y macOS. -->
+        <dependency>
+            <groupId>com.github.usefulness</groupId>
+            <artifactId>webp-imageio</artifactId>
+            <version>0.10.0</version>
+        </dependency>
+
         <!-- Spring Data JPA (trae jakarta.persistence con la versión que maneja Spring Boot) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -106,10 +114,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <!-- Sin <version>: la de spring-boot-starter-parent (3.11). La 3.8.1 no pasaba -parameters a javac. -->
                 <configuration>
                     <release>17</release>
                     <encoding>UTF-8</encoding>
+                    <!-- Nombres de los parámetros en el bytecode: Spring los usa para @PathVariable y @RequestParam.
+                         spring-boot-starter-parent lo activa, pero esta configuración propia lo reemplaza. -->
+                    <parameters>true</parameters>
                 </configuration>
             </plugin>
 
