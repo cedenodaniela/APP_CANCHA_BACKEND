@@ -54,14 +54,6 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
-        <!-- Escribe WebP con ImageIO: las fotos se guardan convertidas a WebP (RF-04, DERCAS §2.2.3).
-             Java no trae un escritor de WebP; esta librería incluye el codificador para Windows, Linux y macOS. -->
-        <dependency>
-            <groupId>com.github.usefulness</groupId>
-            <artifactId>webp-imageio</artifactId>
-            <version>0.10.0</version>
-        </dependency>
-
         <!-- Spring Data JPA (trae jakarta.persistence con la versión que maneja Spring Boot) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
