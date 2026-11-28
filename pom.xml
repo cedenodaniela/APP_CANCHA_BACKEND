@@ -113,15 +113,11 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Compiler Plugin -->
+            <!-- Arma el .jar ejecutable (java -jar) y ofrece spring-boot:run. Sin <version>:
+                 la toma de spring-boot-starter-parent, que también la resuelve IntelliJ. -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <release>17</release>
-                    <encoding>UTF-8</encoding>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
         </plugins>
