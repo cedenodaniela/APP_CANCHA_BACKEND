@@ -39,7 +39,8 @@ public class ConfiguracionUsuarios {
                                                                                  Clock reloj) {
         return new SembrarAdministradorInicialUseCase(usuarios, codificador, reloj);
     }
-  
+
+    @Bean
     public SolicitarRecuperacionUseCase solicitarRecuperacionUseCase(
             UsuarioRepository usuarios, TokenRecuperacionRepository tokens, GeneradorToken generador,
             EnviadorCorreoRecuperacion correo, Clock reloj,
@@ -61,5 +62,4 @@ public class ConfiguracionUsuarios {
                                                      EmisorToken emisor) {
         return new IniciarSesionUseCase(usuarios, codificador, emisor);
     }
-  
 }
