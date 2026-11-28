@@ -62,6 +62,14 @@
             <version>0.10.0</version>
         </dependency>
 
+        <!-- Contrato de la API (OpenAPI 3) y Swagger UI: /v3/api-docs y /swagger-ui.html (AGENTS.md §6).
+             La línea 2.5 es la que corresponde a Spring Boot 3.2. -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
         <!-- Spring Data JPA (trae jakarta.persistence con la versión que maneja Spring Boot) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -130,7 +138,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 </project>
