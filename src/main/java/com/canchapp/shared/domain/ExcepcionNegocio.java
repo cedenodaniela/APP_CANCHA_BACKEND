@@ -13,6 +13,7 @@ public abstract class ExcepcionNegocio extends RuntimeException {
     public enum Tipo {
         DATOS_INVALIDOS,
         NO_AUTENTICADO,
+        NO_ENCONTRADO,
         CONFLICTO
     }
 
