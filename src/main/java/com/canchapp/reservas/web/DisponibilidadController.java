@@ -2,6 +2,7 @@ package com.canchapp.reservas.web;
 
 import com.canchapp.reservas.application.ConsultarDisponibilidadUseCase;
 import com.canchapp.reservas.domain.ReservaInvalidaException;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +26,7 @@ public class DisponibilidadController {
 
     /** Un bloque de disponibilidad en el contrato de la API. El precio va con escala 2 (RN-03). */
     public record BloqueDisponible(Long canchaId, LocalDate fecha, String inicio, String fin, boolean ocupado,
-                                   BigDecimal precio) {
+                                   @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal precio) {
     }
 
     private final ConsultarDisponibilidadUseCase consultar;
