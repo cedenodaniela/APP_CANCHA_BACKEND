@@ -10,6 +10,8 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 /**
  * Traduce las excepciones a respuestas HTTP con el cuerpo {@link ErrorRespuesta}.
@@ -27,6 +29,7 @@ public class ManejadorErrores {
         HttpStatus estado = switch (ex.getTipo()) {
             case DATOS_INVALIDOS -> HttpStatus.BAD_REQUEST;
             case NO_AUTENTICADO -> HttpStatus.UNAUTHORIZED;
+            case NO_ENCONTRADO -> HttpStatus.NOT_FOUND;
             case CONFLICTO -> HttpStatus.CONFLICT;
         };
         return ResponseEntity.status(estado).body(new ErrorRespuesta(ex.getCodigo(), ex.getMessage()));
@@ -36,6 +39,20 @@ public class ManejadorErrores {
     public ResponseEntity<ErrorRespuesta> cuerpoIlegible(HttpMessageNotReadableException ex) {
         return ResponseEntity.badRequest()
                 .body(new ErrorRespuesta("SOLICITUD_INVALIDA", "La solicitud no tiene el formato esperado."));
+    }
+
+    /** Un archivo más grande que {@code spring.servlet.multipart.max-file-size} (5 MB). */
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ErrorRespuesta> archivoMuyGrande(MaxUploadSizeExceededException ex) {
+        return ResponseEntity.badRequest()
+                .body(new ErrorRespuesta("ARCHIVO_MUY_GRANDE", "La imagen debe pesar como máximo 5 MB."));
+    }
+
+    /** Falta la parte {@code multipart} que el endpoint espera, por ejemplo la foto. */
+    @ExceptionHandler(MissingServletRequestPartException.class)
+    public ResponseEntity<ErrorRespuesta> faltaArchivo(MissingServletRequestPartException ex) {
+        return ResponseEntity.badRequest()
+                .body(new ErrorRespuesta("SOLICITUD_INVALIDA", "Adjunta la imagen."));
     }
 
     /** Un {@code @PreAuthorize} que no se cumple: rol sin permiso (RNF-02). */

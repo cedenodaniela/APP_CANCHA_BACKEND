@@ -35,3 +35,6 @@ out/
 # Volcados de memoria de la JVM
 *.hprof
 hs_err_pid*
+
+# Fotos subidas en desarrollo (CANCHAPP_DIR_IMAGENES)
+/almacenamiento/
