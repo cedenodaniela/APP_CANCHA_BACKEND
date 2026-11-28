@@ -48,6 +48,12 @@ El botón del correo lleva a `/recuperar-contrasena?token=…` de esta API (`CAN
 ./mvnw javadoc:javadoc
 ```
 
+`./mvnw verify` falla si el código de dominio (`*/domain`) queda por debajo del 70 % de líneas cubiertas. El informe queda en `target/site/jacoco/index.html`.
+
+## Contrato de la API
+
+Con el backend corriendo, el contrato OpenAPI está en http://localhost:8080/v3/api-docs y se puede probar en http://localhost:8080/swagger-ui.html (pulsa **Authorize** y pega el token de `POST /api/v1/auth/login`). En producción se apaga con `CANCHAPP_SWAGGER=false`.
+
 ## Flujo de trabajo
 
 Ramas fijas `main`, `calidad` y `desarrollo`. Cada RF va en su rama `feature/RF-XX_nombre-breve`, creada desde `desarrollo`, y vuelve por Pull Request. **Los issues y milestones de los tres repositorios se gestionan aquí**, aunque el RF toque también a los clientes. Ver `../AGENTS.md` §12 y `../docs/PLANIFICACION.md` §12.

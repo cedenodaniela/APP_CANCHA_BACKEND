@@ -39,7 +39,7 @@ import java.util.List;
  * <ul>
  *   <li>Sin sesión de servidor ni CSRF: cada solicitud trae su JWT en {@code Authorization: Bearer}.</li>
  *   <li>Públicos solo el inicio de sesión y el registro (RF-01) y la recuperación de contraseña
- *       (RF-02). Todo lo demás exige token.</li>
+ *       (RF-02), y la documentación OpenAPI. Todo lo demás exige token.</li>
  *   <li>El claim {@code rol} se convierte en {@code ROLE_CLIENTE} o {@code ROLE_ADMINISTRADOR},
  *       para autorizar por rol en cada endpoint con {@code @PreAuthorize}.</li>
  *   <li>Los errores 401 y 403 usan el mismo cuerpo {@code {codigo, mensaje}} que el resto de la API.</li>
@@ -64,6 +64,9 @@ public class ConfiguracionSeguridad {
                                 "/api/v1/auth/recuperacion", "/api/v1/auth/recuperacion/restablecer").permitAll()
                         // Página del botón del correo de recuperación, que abre la app (RF-02).
                         .requestMatchers(HttpMethod.GET, "/recuperar-contrasena").permitAll()
+                        // Contrato OpenAPI y Swagger UI: describen la API, no exponen datos. Se apagan con
+                        // CANCHAPP_SWAGGER=false (springdoc.api-docs.enabled).
+                        .requestMatchers(HttpMethod.GET, "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(rs -> rs
